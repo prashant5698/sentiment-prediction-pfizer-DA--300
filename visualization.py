@@ -1,8 +1,12 @@
 import plotly.graph_objects as go
+import plotly.express as px
 
-def plot():
-    fig = go.Figure()
+def plotBar(df, x, title):
 
-    fig.add_trace( go.Line( x = [i for i in range(10)] , y = [ i*i for i in range(10) ] ) )
+    fig = px.bar(df, x=x, title=title)
+    return fig
+
+def plotLine(df, x, y, title):
+    fig = px.line(df, x, y)
 
     return fig

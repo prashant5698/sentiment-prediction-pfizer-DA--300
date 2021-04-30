@@ -4,18 +4,24 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 import pandas as pd
 from database import Report
-from visualization import plot
+from visualization import *
+from AnalyseData import Analyse
 
 engine = create_engine('sqlite:///db.sqlite3')
 Session = sessionmaker(bind=engine)
 sess = Session()
 
+analysis = Analyse("datasets/vaccination_tweets.csv")
+
 st.title('Global Warming and Climate Change Analysis')
 sidebar = st.sidebar
 
-def viewForm():
+def analyseTweets():
+    st.header('Tweets Analysis')
 
-    st.plotly_chart(plot())
+    st.plotly_chart(plotBar(analysis.getDataframe(), 'verified', "Verified vs unverified"))
+
+def viewForm():
 
     title = st.text_input("Report Title")
     desc = st.text_area('Report Description')
@@ -43,10 +49,10 @@ def viewReport():
     st.markdown(markdown)
 
 sidebar.header('Choose Your Option')
-options = [ 'View Database', 'Analyse', 'View Report' ]
+options = [ 'View Database', 'Analyse Tweets', 'View Report' ]
 choice = sidebar.selectbox( options = options, label="Choose Action" )
 
 if choice == options[1]:
-    viewForm()
+    analyseTweets()
 elif choice == options[2]:
     viewReport()
