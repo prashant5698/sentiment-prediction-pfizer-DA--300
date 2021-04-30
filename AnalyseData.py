@@ -18,7 +18,7 @@ class Analyse:
         self.df['med'] = self.df['text'].apply(lambda word:word.count('https://t.co/'))
         self.df['med'] = self.df['med'].apply(lambda x:'No Media' if x==0 else 'Media')
 
-        L = ['year', 'month', 'day', 'dayofweek', 'dayofyear', 'weekofyear', 'quarter']
-        self.df = self.df.join(pd.concat((getattr(self.df['date'].dt, i).rename(i) for i in L), axis=1))
-        
+        #L = ['year', 'month', 'day', 'dayofweek', 'dayofyear', 'weekofyear', 'quarter']
+        #self.df = self.df.join(pd.concat((getattr(self.df['date'].dt, i).rename(i) for i in L), axis=1))
+
         return self.df

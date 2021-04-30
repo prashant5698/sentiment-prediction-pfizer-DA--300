@@ -55,3 +55,15 @@ def scatterplot(df):
                  size='total_engagement',
                  title='Most engaged days in December')
     return fig
+
+def barplot1(df, x , y, color, color_continuous_scale, title):
+    tot_eng = df.groupby('user_name',as_index=False).agg({'total_engagement':'sum'}).sort_values('total_engagement',ascending=False).head(10)
+
+
+    fig = px.bar(tot_eng,
+             x=x,
+             y=y,
+             color=color,
+             color_continuous_scale=color_continuous_scale,
+             title=title)
+    return fig
