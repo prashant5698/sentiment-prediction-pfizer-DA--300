@@ -34,3 +34,4 @@ def piechart(df):
                 title='Media/No Media',
                 color_discrete_sequence = px.colors.sequential.Rainbow)
     fig.update_traces(textposition='inside', textinfo='percent+label')
+    return fig
