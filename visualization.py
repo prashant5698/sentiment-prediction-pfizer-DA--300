@@ -35,3 +35,23 @@ def piechart(df):
                 color_discrete_sequence = px.colors.sequential.Rainbow)
     fig.update_traces(textposition='inside', textinfo='percent+label')
     return fig
+
+def add_tracePlot(df):
+    line = df.groupby('date',as_index=False).agg({'total_engagement':'sum'})
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(x=line.date, y=line.total_engagement,
+                    mode='lines+markers'))
+    return fig
+
+def scatterplot(df):
+    december=df.loc[df['month']==12]
+    day_december = december.groupby('day',as_index=False).agg({'total_engagement':'sum'})
+
+    fig = px.scatter(day_december,
+                 x='day',
+                 y='total_engagement',
+                 color_continuous_scale='Rainbow',
+                 color='total_engagement',
+                 size='total_engagement',
+                 title='Most engaged days in December')
+    return fig

@@ -23,6 +23,8 @@ def analyseTweets():
     st.write(analysis.getDataframe())
     st.plotly_chart(barplot(analysis.getDataframe(), 'acc_class','total_engagement','total_engagement','Rainbow','Engagement By Account_Class'))
     st.plotly_chart(piechart(analysis.getDataframe(),))
+    st.plotly_chart(add_tracePlot(analysis.getDataframe(),))
+    st.plotly_chart(scatterplot(analysis.getDataframe(),))
 
 def viewForm():
 
