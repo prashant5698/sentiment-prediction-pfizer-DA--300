@@ -7,9 +7,13 @@ class Analyse:
         self.cleanData()
 
     def cleanData(self):
-        self.df.drop(columns=['id'], inplace=True)
-        cols = self.df.columns[:-7]
-        self.df.rename(columns=dict(zip(cols, [col[5:] for col in cols])), inplace = True)
+        pass
 
     def getDataframe(self):
+        self.df['acc_class'] = self.df['user_followers'].apply(lambda x:'weak'if x<=100 else ('norm' if 1000>=x>100 else 
+                                                                       ('strong' if 10000>=x>1000
+                                                                        else 'influencer')))
+        self.df['total_engagement']=self.df['retweets']+self.df['favorites']
+        self.df['med'] = self.df['text'].apply(lambda word:word.count('https://t.co/'))
+        self.df['med'] = self.df['med'].apply(lambda x:'No Media' if x==0 else 'Media')
         return self.df

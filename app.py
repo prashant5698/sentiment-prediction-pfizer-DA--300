@@ -19,7 +19,10 @@ sidebar = st.sidebar
 def analyseTweets():
     st.header('Tweets Analysis')
 
-    st.plotly_chart(plotBar(analysis.getDataframe(), 'verified', "Verified vs unverified"))
+    st.plotly_chart(plotBar(analysis.getDataframe(), 'user_verified', "Verified vs unverified"))
+    st.write(analysis.getDataframe())
+    st.plotly_chart(barplot(analysis.getDataframe(), 'acc_class','total_engagement','total_engagement','Rainbow','Engagement By Account_Class'))
+    st.plotly_chart(piechart(analysis.getDataframe(),))
 
 def viewForm():
 
