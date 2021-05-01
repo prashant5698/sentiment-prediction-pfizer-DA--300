@@ -1,4 +1,5 @@
 import pandas as pd
+from datetime import date
 
 class Analyse:
 
@@ -18,7 +19,11 @@ class Analyse:
         self.df['med'] = self.df['text'].apply(lambda word:word.count('https://t.co/'))
         self.df['med'] = self.df['med'].apply(lambda x:'No Media' if x==0 else 'Media')
 
-        #L = ['year', 'month', 'day', 'dayofweek', 'dayofyear', 'weekofyear', 'quarter']
-        #self.df = self.df.join(pd.concat((getattr(self.df['date'].dt, i).rename(i) for i in L), axis=1))
+        self.df['today']=date.today()
+        self.df['user_created']=pd.to_datetime(self.df['user_created']).dt.year
+        self.df['today']=pd.to_datetime(self.df['today'])
+        self.df['today']=self.df['today'].dt.year
+        self.df['acc_age']= self.df['today']-self.df['user_created']
+
 
         return self.df

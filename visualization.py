@@ -2,6 +2,12 @@ import plotly.graph_objects as go
 import plotly.express as px
 import seaborn as sns
 import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import en_core_web_sm
+import spacy
+import re
+
 
 def plotBar(df, x, title):
 
