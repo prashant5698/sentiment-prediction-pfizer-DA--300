@@ -4,19 +4,11 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import en_core_web_sm
 import spacy
-import re
-
 
 def plotBar(df, x, title):
 
     fig = px.bar(df, x=x, title=title)
-    return fig
-
-def plotLine(df, x, y, title):
-    fig = px.line(df, x, y)
-
     return fig
 
 def barplot(df,x,y,color,color_continuous_scale,title):
@@ -29,15 +21,14 @@ def barplot(df,x,y,color,color_continuous_scale,title):
              title=title)
     return fig
 
-def piechart(df):
-    Media = len(df[df['med']=='Media'])
-    No_Media = len(df[df['med']=='No Media'])
-    Platform = ['Media','No Media']
-    Count = [Media,No_Media]
-    #====
-    fig = px.pie(names = Platform,
-                values = Count,
-                title='Media/No Media',
+
+
+def plotPie(names, values, title):
+    
+    fig = px.pie(
+                names = names,
+                values = values,
+                title=title,
                 color_discrete_sequence = px.colors.sequential.Rainbow)
     fig.update_traces(textposition='inside', textinfo='percent+label')
     return fig
