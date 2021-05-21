@@ -8,6 +8,7 @@ class Analyse:
 
     def __init__(self, path):
         self.df = pd.read_csv(path)
+        self.df = self.df[:1000]
         self.cleanData()
         self.generateSentiments()
 
@@ -86,6 +87,9 @@ class Analyse:
         self.df['today']=pd.to_datetime(self.df['today'])
         self.df['today']=self.df['today'].dt.year
         self.df['acc_age']= self.df['today']-self.df['user_created']
+
+    def getVerified(self):
+        return self.df.groupby('user_verified').count()['user_name']
 
     def getDataframe(self):
         return self.df
